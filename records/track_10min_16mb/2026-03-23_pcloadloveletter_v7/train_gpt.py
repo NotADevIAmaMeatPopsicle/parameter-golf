@@ -745,7 +745,7 @@ CODEBOOK_ATTN_QKV = int(os.environ.get("CODEBOOK_ATTN_QKV", 80))
 CODEBOOK_ATTN_PROJ = int(os.environ.get("CODEBOOK_ATTN_PROJ", 64))
 USE_NOVEL_COMPRESSION = bool(int(os.environ.get("USE_NOVEL_COMPRESSION", "1")))
 # v8: Codebook-GPTQ hybrid — Hessian-weighted error compensation after codebook quantization
-USE_GPTQ = bool(int(os.environ.get("USE_GPTQ", "1")))
+USE_GPTQ = bool(int(os.environ.get("USE_GPTQ", "0")))  # v8.1: GPTQ hurts codebook quant
 GPTQ_CALIB_SEQS = int(os.environ.get("GPTQ_CALIB_SEQS", 256))  # calibration sequences for Hessian
 
 
