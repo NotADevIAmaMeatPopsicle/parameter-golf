@@ -1,7 +1,17 @@
 #!/bin/bash
 # v8.1 Scoring Run — NO TTT (legal, fast, submittable)
 # Total time: ~14 min (10 train + 2 compress + 2 eval)
+# Self-contained: installs all deps, downloads data if needed
 set -e
+
+# Install deps (fast if already installed)
+pip install -q torch==2.6.0+cu124 --index-url https://download.pytorch.org/whl/cu124 2>/dev/null || true
+pip install -q sentencepiece zstandard huggingface_hub 2>/dev/null || true
+
+# Download data if not present
+if [ ! -f data/datasets/fineweb10B_sp1024/fineweb_val_000000.bin ]; then
+    python3 data/cached_challenge_fineweb.py --variant sp1024 --train-shards 80
+fi
 
 export DATA_PATH=data/datasets/fineweb10B_sp1024
 export TOKENIZER_PATH=data/tokenizers/fineweb_1024_bpe.model
